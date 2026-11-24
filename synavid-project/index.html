@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SynAVID · Immersive audiovisual scenes</title><meta name="description" content="Eight dynamic scenes observed from moving and fixed cameras, each paired with spatial audio.">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/synavid-mark.png">
+<link rel="stylesheet" href="assets/review.css"><link rel="stylesheet" href="project.css"><script defer src="assets/examples.js"></script></head>
+<body><a class="skip" href="#overview-section">Skip to scene tour</a>
+<div class="mast"><a class="word" href="#top">SynAVID</a><nav aria-label="Main navigation"><a href="#abstract">Abstract</a><a href="#overview-section">Demos</a><a href="#figures">Figures</a></nav></div>
+<main class="showcase" id="top">
+<header class="intro"><h1><img src="assets/synavid-mark.png" alt="" width="256" height="256">SynAVID</h1><p>A Synthetic Audio-Visual Immersive Dataset of Dynamic Scenes</p>
+  <div class="byline">
+    <ul class="authors" aria-label="Authors">
+      <li>Jun Xu<sup>1</sup></li>
+      <li>Sujing Li<sup>1</sup></li>
+      <li>Chunhao Bi<sup>1</sup></li>
+      <li>Zhengxue Cheng<sup>1</sup></li>
+      <li>Ronghua Wu<sup>2</sup></li>
+      <li>Qunshan Gu<sup>2</sup></li>
+      <li>Li Song<sup>1</sup></li>
+    </ul>
+    <ul class="affiliations" aria-label="Affiliations">
+      <li><sup>1</sup> Shanghai Jiao Tong University</li>
+      <li><sup>2</sup> Ant Group</li>
+    </ul>
+  </div>
+  <div class="project-links" role="group" aria-label="Project resources">
+    <button type="button" disabled>arXiv</button>
+    <button type="button" disabled>Dataset</button>
+  </div>
+</header>
+<figure class="photo" id="teaser">
+  <button type="button" class="enlarge" aria-label="Enlarge the SynAVID teaser">
+    <img src="figures/teaser.webp" width="2400" height="944" fetchpriority="high" alt="Multiview RGB images and left–right waveforms from all eight episodes surround a schematic of the fixed and moving camera–listener pairs.">
+  </button>
+  <figcaption>Eight dynamic scenes, seen and heard from fixed and moving viewpoints.</figcaption>
+</figure>
+<section id="abstract"><h2>Abstract</h2><p class="abstract-text">Immersive scene modeling requires synchronized visual and auditory observations under changing viewpoints and scene conditions. Obtaining such observations and references for controlled scene changes remains challenging. We introduce SynAVID, a synthetic audio-visual immersive dataset comprising eight indoor and outdoor scenes. Each minute-scale episode combines fixed camera arrays and moving trajectories with synchronized, viewpoint-dependent binaural audio. Shared scene dynamics, sound-source events, and observer poses drive visual rendering and geometry-aware acoustic synthesis. We evaluate existing methods for visual reconstruction, binaural audio reconstruction, and audiovisual editing. Mixed-observation configurations generally improve visual reconstruction on fixed and moving test views, while transiently occupied and sparsely observed regions remain challenging. Methods rank differently on spectral, interaural, and perceptual audio metrics. Geometric and instance annotations expose uneven observation support and local Gaussian representations beyond aggregate scores. Paired references assess target edits and surrounding content, while controlled geometry changes produce listener-dependent acoustic responses.</p></section>
+<section id="overview-section" class="tour"><h2>Eight scenes in one minute</h2>
+<video id="overview" controls playsinline preload="metadata" poster="assets/scene_overview.jpg" width="1600" height="900" aria-label="Eight immersive views with alternating binaural audio"><source src="assets/scene_overview.mp4" type="video/mp4"></video>
+<p>Four indoor scenes play together, followed by four outdoor scenes. Each view shows a continuous 30-second excerpt. The gold frame and speaker icon mark the view you hear for each 7.5-second turn.</p>
+<details class="requires-js"><summary>Jump to a scene</summary>
+<table><thead><tr><th>Film time</th><th>Scene</th><th>Sound event</th><th>Episode time heard</th></tr></thead><tbody>
+<tr><td><button type="button" class="cue" data-time="0">0:00</button></td><th scope="row">Concert</th><td>Piano and violin during the stage lift</td><td>40–47.5 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="7.5">0:07.5</button></td><th scope="row">Apartment</th><td>Living-room dance with record-player music</td><td>12.5–20 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="15">0:15</button></td><th scope="row">Gym</th><td>Weight impacts</td><td>84–91.5 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="22.5">0:22.5</button></td><th scope="row">Mall</th><td>Shopper conversations and loudspeaker music</td><td>37.5–45 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="30">0:30</button></td><th scope="row">Street</th><td>A vehicle horn at the intersection</td><td>48–55.5 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="37.5">0:37.5</button></td><th scope="row">Rural</th><td>Wingbeats, hoofbeats and animal calls</td><td>56–63.5 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="45">0:45</button></td><th scope="row">Park</th><td>Loudspeaker music during the group dance</td><td>24–31.5 s</td></tr>
+<tr><td><button type="button" class="cue" data-time="52.5">0:52.5</button></td><th scope="row">Snow</th><td>A wolf howl</td><td>26–33.5 s</td></tr>
+</tbody></table>
+</details></section>
+<nav class="contents experiments" aria-label="Supplementary examples"><a href="#occlusion">Dynamic occlusion</a><a href="#listening">Spatial recordings</a><a href="#mall">Mall regions</a><a href="#editing">Concert edits</a><a href="#resources">Credits</a></nav>
+<section id="occlusion"><h2>Dynamic occlusion in Concert · Figure 6</h2>
+<p>Two listeners hear the same piano and violin performance. Compare the parked and moving panel at each listener using headphones. Switching clips keeps the playback time and volume.</p>
+<form id="comparison" class="requires-js">
+  <fieldset><legend>Listener</legend>
+    <label><input type="radio" name="listener" value="main" checked> Main</label>
+    <label><input type="radio" name="listener" value="control"> Control</label>
+  </fieldset>
+  <fieldset><legend>Panel</legend>
+    <label><input type="radio" name="panel" value="parked" checked> Parked</label>
+    <label><input type="radio" name="panel" value="moving"> Moving</label>
+  </fieldset>
+  <fieldset><legend>Sound</legend>
+    <label>Source <select name="instrument"><option value="mix">Both instruments</option><option value="piano">Piano</option><option value="violin">Violin</option></select></label>
+    <label>Component <select name="component" disabled><option value="total">Total received</option><option value="direct">Direct</option><option value="reflected">Reflected</option></select></label>
+  </fieldset>
+</form>
+<video id="clip" controls playsinline preload="auto" aria-label="Concert occlusion comparison" src="assets/concert_occlusion/main_parked.mp4"></video>
+<p>The clip starts at 20 s in the episode. At the main listener, the moving panel crosses the piano path at <b>1.4–2.2 s</b> and the violin path at <b>4.0–4.8 s</b> on the player. Both direct paths stay open at the control listener. To hear what reaches the main listener during the second hold, select Violin and switch between Direct and Reflected. The parked panel can overlap the performer in the picture while leaving the ray from the violin to the listener clear.</p>
+<noscript><style>.requires-js{display:none}.enlarge{pointer-events:none}</style><details><summary>Other panel recordings</summary>
+<figure><figcaption>Main listener · parked · Piano · total</figcaption><video aria-label="Main listener · parked · Piano · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_piano_total.mp4"></video></figure>
+<figure><figcaption>Main listener · parked · Piano · direct</figcaption><video aria-label="Main listener · parked · Piano · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_piano_direct.mp4"></video></figure>
+<figure><figcaption>Main listener · parked · Piano · reflected</figcaption><video aria-label="Main listener · parked · Piano · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_piano_reflected.mp4"></video></figure>
+<figure><figcaption>Main listener · parked · Violin · total</figcaption><video aria-label="Main listener · parked · Violin · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_violin_total.mp4"></video></figure>
+<figure><figcaption>Main listener · parked · Violin · direct</figcaption><video aria-label="Main listener · parked · Violin · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_violin_direct.mp4"></video></figure>
+<figure><figcaption>Main listener · parked · Violin · reflected</figcaption><video aria-label="Main listener · parked · Violin · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_parked_violin_reflected.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Both instruments</figcaption><video aria-label="Main listener · moving · Both instruments" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Piano · total</figcaption><video aria-label="Main listener · moving · Piano · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_piano_total.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Piano · direct</figcaption><video aria-label="Main listener · moving · Piano · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_piano_direct.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Piano · reflected</figcaption><video aria-label="Main listener · moving · Piano · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_piano_reflected.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Violin · total</figcaption><video aria-label="Main listener · moving · Violin · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_violin_total.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Violin · direct</figcaption><video aria-label="Main listener · moving · Violin · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_violin_direct.mp4"></video></figure>
+<figure><figcaption>Main listener · moving · Violin · reflected</figcaption><video aria-label="Main listener · moving · Violin · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/main_moving_violin_reflected.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Both instruments</figcaption><video aria-label="Control listener · parked · Both instruments" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Piano · total</figcaption><video aria-label="Control listener · parked · Piano · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_piano_total.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Piano · direct</figcaption><video aria-label="Control listener · parked · Piano · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_piano_direct.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Piano · reflected</figcaption><video aria-label="Control listener · parked · Piano · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_piano_reflected.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Violin · total</figcaption><video aria-label="Control listener · parked · Violin · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_violin_total.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Violin · direct</figcaption><video aria-label="Control listener · parked · Violin · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_violin_direct.mp4"></video></figure>
+<figure><figcaption>Control listener · parked · Violin · reflected</figcaption><video aria-label="Control listener · parked · Violin · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_parked_violin_reflected.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Both instruments</figcaption><video aria-label="Control listener · moving · Both instruments" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Piano · total</figcaption><video aria-label="Control listener · moving · Piano · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_piano_total.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Piano · direct</figcaption><video aria-label="Control listener · moving · Piano · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_piano_direct.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Piano · reflected</figcaption><video aria-label="Control listener · moving · Piano · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_piano_reflected.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Violin · total</figcaption><video aria-label="Control listener · moving · Violin · total" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_violin_total.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Violin · direct</figcaption><video aria-label="Control listener · moving · Violin · direct" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_violin_direct.mp4"></video></figure>
+<figure><figcaption>Control listener · moving · Violin · reflected</figcaption><video aria-label="Control listener · moving · Violin · reflected" width="640" height="360" controls playsinline preload="none" src="assets/concert_occlusion/control_moving_violin_reflected.mp4"></video></figure>
+</details></noscript>
+<details><summary>Propagation measurements</summary>
+<p>The gray intervals mark the two panel holds. The first plot shows how the moving panel changes broadband response energy relative to the parked panel. The second compares the received music in three frequency bands.</p>
+<img loading="lazy" class="plot" src="assets/measurements/panel_response_change.svg" alt="Change in broadband impulse-response energy">
+<img loading="lazy" class="plot" src="assets/measurements/panel_music_bands.svg" alt="Received music energy in three frequency bands">
+</details><details><summary>Compare reflection updates at 2, 10, and 30 Hz</summary>
+<p>During 23–26 s the panel crosses the violin path and moves away. The recordings include direct sound updated at 30 Hz throughout. The curve shows the deviation in reflected response energy from the 30 Hz reference.</p><div class="rate-audio">
+<figure><figcaption>2 Hz reflections</figcaption><audio controls preload="none" aria-label="Violin with 2 Hz reflection updates" src="assets/listening/panel_violin_2hz.wav"></audio></figure>
+<figure><figcaption>10 Hz reflections</figcaption><audio controls preload="none" aria-label="Violin with 10 Hz reflection updates" src="assets/listening/panel_violin_10hz.wav"></audio></figure>
+<figure><figcaption>30 Hz reflections</figcaption><audio controls preload="none" aria-label="Violin with 30 Hz reflection updates" src="assets/listening/panel_violin_30hz.wav"></audio></figure>
+</div><img loading="lazy" class="plot" src="assets/measurements/reflection_rate_error.svg" alt="Signed reflection energy differences during panel entry, hold, and departure">
+</details></section>
+<section id="listening"><h2>Recordings from Figures 1 and 3</h2>
+<details><summary>Eight scene recordings · Figure 1</summary><p>Each clip plays the mixture received at the indicated camera.</p>
+<div class="scene-audio">
+<figure><figcaption><strong>Concert</strong> · Piano and violin<small>cam04, 20–30 s</small></figcaption><audio controls preload="none" aria-label="Concert — Piano and violin" src="assets/listening/concert.m4a"></audio></figure>
+<figure><figcaption><strong>Apartment</strong> · Television<small>cam34, 83–91 s</small></figcaption><audio controls preload="none" aria-label="Apartment — Television" src="assets/listening/apartment.m4a"></audio></figure>
+<figure><figcaption><strong>Gym</strong> · Weight impacts<small>cam25, 84–92 s</small></figcaption><audio controls preload="none" aria-label="Gym — Weight impacts" src="assets/listening/gym.m4a"></audio></figure>
+<figure><figcaption><strong>Mall</strong> · Conversation<small>mall_fixed_L2_13, 32–40 s</small></figcaption><audio controls preload="none" aria-label="Mall — Conversation" src="assets/listening/mall.m4a"></audio></figure>
+<figure><figcaption><strong>Street</strong> · Car horns<small>cam37, 65–70 s</small></figcaption><audio controls preload="none" aria-label="Street — Car horns" src="assets/listening/street.m4a"></audio></figure>
+<figure><figcaption><strong>Rural</strong> · Wingbeats<small>fixed031, 0–8 s</small></figcaption><audio controls preload="none" aria-label="Rural — Wingbeats" src="assets/listening/rural.m4a"></audio></figure>
+<figure><figcaption><strong>Park</strong> · Dog barks<small>fixed02, 60–66 s</small></figcaption><audio controls preload="none" aria-label="Park — Dog barks" src="assets/listening/park.m4a"></audio></figure>
+<figure><figcaption><strong>Snow</strong> · Wolf howl<small>cam12, 26–33 s</small></figcaption><audio controls preload="none" aria-label="Snow — Wolf howl" src="assets/listening/snow.m4a"></audio></figure>
+</div></details>
+<details><summary>Concert stage lift · Figure 3</summary>
+<p>Hear the same 41–49 s passage from a fixed listener and a moving listener. Each instrument retains its original received level at both ears.</p>
+<table class="audio-matrix"><thead><tr><th scope="col">Listener</th><th scope="col">Piano</th><th scope="col">Violin</th></tr></thead><tbody>
+<tr><th scope="row">A · Fixed<small>cam45</small></th><td data-label="Piano"><audio controls preload="none" aria-label="Piano at listener A · Fixed" src="assets/listening/cam45_piano.m4a"></audio></td><td data-label="Violin"><audio controls preload="none" aria-label="Violin at listener A · Fixed" src="assets/listening/cam45_violin.m4a"></audio></td></tr>
+<tr><th scope="row">B · Moving<small>immersive02</small></th><td data-label="Piano"><audio controls preload="none" aria-label="Piano at listener B · Moving" src="assets/listening/immersive02_piano.m4a"></audio></td><td data-label="Violin"><audio controls preload="none" aria-label="Violin at listener B · Moving" src="assets/listening/immersive02_violin.m4a"></audio></td></tr>
+</tbody></table></details></section>
+<section id="mall"><h2>Where Mall reconstruction is measured · Figure 5</h2>
+<p>At 68 s, the overlay marks the two pedestrians and two stationary surfaces used to measure local observation support and reconstruction.</p><div class="image-pair">
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Original frame"><img loading="lazy" src="assets/mall_reference/reference.png" width="640" height="360" alt="Original frame"></button><figcaption>Original frame</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Mall scoring regions overlaid on the original frame"><img loading="lazy" src="assets/mall_reference/regions.png" width="640" height="360" alt="Mall scoring regions overlaid on the original frame"></button><figcaption>Scoring regions</figcaption></figure>
+</div><p class="legend">
+<span class="key"><span class="dot" style="background:#d55e00"></span>Red-plaid pedestrian</span>
+<span class="key"><span class="dot" style="background:#0072b2"></span>Black-clothed pedestrian</span>
+<span class="key"><span class="dot" style="background:#009e73"></span>Shop sign</span>
+<span class="key"><span class="dot" style="background:#cc79a7"></span>Corridor wall</span>
+</p><details><summary>Training observations over time</summary>
+<p>Each pedestrian contributes visible pixels at their marked location in 3 of the 240 half-second samples. Fixed cameras supply 99.3% of the sign’s projected-pixel support (9.05 million pixel-seconds across all cameras). Moving cameras supply 92.4% of the wall’s much smaller total (18,896 pixel-seconds).</p>
+<p>Pixel counts are summed within each camera group at each sampled time. For pedestrians, the ranges in Table S4 account for uncertainty at the boundary of the marked 3D region.</p>
+</details></section>
+<section id="editing"><h2>Removing and relocating the Concert violinist · Figure 6</h2>
+<p>Both rows show frame 149 at 30 fps. The edited RGB includes cast shadows. The scoring masks cover the visible violinist, violin, and bow. Floor shadows outside those silhouettes contribute to the outside-mask and full-frame scores. Select an image to enlarge it.</p>
+<h3>Removal · cam17</h3><p>Look at the lower-right floor. The violinist’s shadow disappears in the edited reference and remains visible in the ProPainter output.</p><div class="image-grid methods">
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · Original"><img loading="lazy" src="assets/visual_edits/removal/unedited_rgb.png" width="1280" height="720" alt="Removal · Original"></button><figcaption>Original</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · Edited reference"><img loading="lazy" src="assets/visual_edits/removal/edited_gt.png" width="1280" height="720" alt="Removal · Edited reference"></button><figcaption>Edited reference</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · ProPainter"><img loading="lazy" src="assets/visual_edits/removal/propainter.png" width="1280" height="720" alt="Removal · ProPainter"></button><figcaption>ProPainter</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · FTGS++"><img loading="lazy" src="assets/visual_edits/removal/ftgs_deleted.png" width="1280" height="720" alt="Removal · FTGS++"></button><figcaption>FTGS++</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · TRASE"><img loading="lazy" src="assets/visual_edits/removal/trase_deleted.png" width="1280" height="720" alt="Removal · TRASE"></button><figcaption>TRASE</figcaption></figure>
+</div><details><summary>Removal input and evaluation masks</summary><p>SAM supplies the input mask from RGB. The removal scoring mask is the original visible silhouette.</p><div class="image-grid masks">
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · SAM input mask"><img loading="lazy" src="assets/visual_edits/removal/sam_input.png" width="1280" height="720" alt="Removal · SAM input mask"></button><figcaption>SAM input mask</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Removal · Evaluation mask"><img loading="lazy" src="assets/visual_edits/removal/evaluation_mask.png" width="1280" height="720" alt="Removal · Evaluation mask"></button><figcaption>Evaluation mask</figcaption></figure>
+</div></details>
+<h3>Relocation · cam21</h3><p>Compare the floor around the violinist’s feet at the old and new positions. The shadow moves with the performer in the edited reference.</p><div class="image-grid methods">
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · Original"><img loading="lazy" src="assets/visual_edits/relocation/unedited_rgb.png" width="1280" height="720" alt="Relocation · Original"></button><figcaption>Original</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · Edited reference"><img loading="lazy" src="assets/visual_edits/relocation/edited_gt.png" width="1280" height="720" alt="Relocation · Edited reference"></button><figcaption>Edited reference</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · ReVideo"><img loading="lazy" src="assets/visual_edits/relocation/revideo_720.png" width="1280" height="720" alt="Relocation · ReVideo"></button><figcaption>ReVideo</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · FTGS++"><img loading="lazy" src="assets/visual_edits/relocation/ftgs_translated.png" width="1280" height="720" alt="Relocation · FTGS++"></button><figcaption>FTGS++</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · TRASE"><img loading="lazy" src="assets/visual_edits/relocation/trase_translated.png" width="1280" height="720" alt="Relocation · TRASE"></button><figcaption>TRASE</figcaption></figure>
+</div><details><summary>Relocation input and evaluation masks</summary><p>SAM supplies the input mask from RGB. The relocation scoring mask is the pixelwise union of the original and translated visible silhouettes.</p><div class="image-grid masks">
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · SAM input mask"><img loading="lazy" src="assets/visual_edits/relocation/sam_input.png" width="1280" height="720" alt="Relocation · SAM input mask"></button><figcaption>SAM input mask</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · Evaluation mask"><img loading="lazy" src="assets/visual_edits/relocation/evaluation_mask.png" width="1280" height="720" alt="Relocation · Evaluation mask"></button><figcaption>Evaluation mask</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · Original silhouette"><img loading="lazy" src="assets/visual_edits/relocation/original_visible.png" width="1280" height="720" alt="Relocation · Original silhouette"></button><figcaption>Original silhouette</figcaption></figure>
+<figure class="photo"><button type="button" class="enlarge" aria-label="Enlarge Relocation · Translated silhouette"><img loading="lazy" src="assets/visual_edits/relocation/translated_visible.png" width="1280" height="720" alt="Relocation · Translated silhouette"></button><figcaption>Translated silhouette</figcaption></figure>
+</div></details>
+<h3 id="violin-removal">Violin removal in audio · Table 6</h3>
+<p>At the same listener (cam17), the piano enters near the end of the first excerpt and plays alongside the violin in the second. The piano reference preserves the original room response. All clips retain their relative levels.</p>
+<table class="audio-matrix"><thead><tr><th scope="col">Recording</th><th scope="col">0–10 s</th><th scope="col">20–30 s</th></tr></thead><tbody>
+<tr><th scope="row">Original mixture</th><td data-label="0–10 s"><audio controls preload="none" aria-label="Original mixture, 0 to 10 seconds" src="assets/listening/removal_original.m4a"></audio></td><td data-label="20–30 s"><audio controls preload="none" aria-label="Original mixture, 20 to 30 seconds" src="assets/listening/removal_20_30_original.m4a"></audio></td></tr>
+<tr><th scope="row">Piano reference</th><td data-label="0–10 s"><audio controls preload="none" aria-label="Piano reference, 0 to 10 seconds" src="assets/listening/removal_piano.m4a"></audio></td><td data-label="20–30 s"><audio controls preload="none" aria-label="Piano reference, 20 to 30 seconds" src="assets/listening/removal_20_30_piano.m4a"></audio></td></tr>
+<tr><th scope="row">SmartDJ</th><td data-label="0–10 s"><audio controls preload="none" aria-label="SmartDJ, 0 to 10 seconds" src="assets/listening/removal_smartdj.m4a"></audio></td><td data-label="20–30 s"><audio controls preload="none" aria-label="SmartDJ, 20 to 30 seconds" src="assets/listening/removal_20_30_smartdj.m4a"></audio></td></tr>
+<tr><th scope="row">Banquet</th><td data-label="0–10 s"><audio controls preload="none" aria-label="Banquet, 0 to 10 seconds" src="assets/listening/removal_banquet.m4a"></audio></td><td data-label="20–30 s"><audio controls preload="none" aria-label="Banquet, 20 to 30 seconds" src="assets/listening/removal_20_30_banquet.m4a"></audio></td></tr>
+</tbody></table></section>
+<section id="figures"><h2>Figures from the paper</h2><article class="paper-figure"><div><h3>From scripts to shared scene time</h3><p>Actors, objects and sound events follow one timeline. Camera and listener trajectories determine how each observer experiences the episode.</p></div><button class="enlarge" aria-label="Enlarge From scripts to shared scene time"><img loading="lazy" src="figures/scene_organization.webp" alt="Actors, objects and sound events follow one timeline. Camera and listener trajectories determine how each observer experiences the episode."></button></article><article class="paper-figure"><div><h3>Seeing and hearing the same performance</h3><p>Two Concert listeners observe the same eight seconds. Their positions, orientations and propagation paths change what each one hears.</p></div><button class="enlarge" aria-label="Enlarge Seeing and hearing the same performance"><img loading="lazy" src="figures/audiovisual_acquisition.webp" alt="Two Concert listeners observe the same eight seconds. Their positions, orientations and propagation paths change what each one hears."></button></article><article class="paper-figure"><div><h3>Reconstructing moving scenes</h3><p>Matched test frames compare the reference with novel-view reconstructions. F denotes training on fixed views and FM includes moving views.</p></div><button class="enlarge" aria-label="Enlarge Reconstructing moving scenes"><img loading="lazy" src="figures/subjective.webp" alt="Matched test frames compare the reference with novel-view reconstructions. F denotes training on fixed views and FM includes moving views."></button></article><article class="paper-figure"><div><h3>Where the Mall cameras look</h3><p>A moving shopper, a shop sign and a corridor wall receive markedly different amounts of training-view coverage. The plots track this support over time.</p></div><button class="enlarge" aria-label="Enlarge Where the Mall cameras look"><img loading="lazy" src="figures/analysis.webp" alt="A moving shopper, a shop sign and a corridor wall receive markedly different amounts of training-view coverage. The plots track this support over time."></button></article><article class="paper-figure"><div><h3>Editing a performer and moving a sound barrier</h3><p>Paired frames show removal and relocation of the violinist. The final panels compare the sound reaching two listeners as a barrier moves.</p></div><button class="enlarge" aria-label="Enlarge Editing a performer and moving a sound barrier"><img loading="lazy" src="figures/edit_occlusion.webp" alt="Paired frames show removal and relocation of the violinist. The final panels compare the sound reaching two listeners as a barrier moves."></button></article></section>
+<footer id="resources"><details><summary>Audio credits</summary>
+<ul>
+<li>The Park loudspeaker plays Cold Funk and Funkorama by Kevin MacLeod (incompetech.com), CC BY 4.0. Excerpts were mixed to mono, faded, and gain-adjusted.<small class="credit-sources">Cold Funk: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100499<br>Funkorama: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100474<br>CC BY 4.0: https://creativecommons.org/licenses/by/4.0/</small></li>
+<li>The Concert piano uses Salamander Grand Piano v3 by Alexander Holm, CC BY 3.0. The samples render an original MIDI performance.<small class="credit-sources">Salamander Grand Piano v3: https://github.com/sfzinstruments/SalamanderGrandPiano/tree/3382bf9496bba2486f5ab0de55a264d1dfc38404<br>CC BY 3.0: https://creativecommons.org/licenses/by/3.0/</small></li>
+<li>The Concert violin uses VSCO 2 Community Edition by Sam Gossner and Simon Dalzell, with sample editing by Elan Hickler (Soundemote), CC0 1.0. Six bowed samples form the violin part.<small class="credit-sources">VSCO 2 Community Edition: https://github.com/sgossner/VSCO-2-CE/tree/440300901dfe9275fd84e0b7763af1f8443ae62e/Strings/Solo%20Violin/Arco%20Vib<br>CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/</small></li>
+<li>Binaural rendering uses the neutral-head response from the FABIAN HRTF database by Fabian Brinkmann, Alexander Lindau, Stefan Weinzierl, Gunnar Geissler, Steven van de Par, Markus Müller-Trapet, Rob Opdam, and Michael Vorländer, CC BY 4.0.<small class="credit-sources">FABIAN HRTF database: https://doi.org/10.14279/depositonce-5718.4<br>CC BY 4.0: https://creativecommons.org/licenses/by/4.0/</small></li>
+</ul></details></footer>
+<dialog id="image-viewer" aria-labelledby="image-caption"><form method="dialog"><strong id="image-caption"></strong><button type="submit" autofocus>Close</button></form><img id="enlarged-image" alt=""></dialog>
+</main></body></html>
