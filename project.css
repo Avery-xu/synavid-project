@@ -14,7 +14,8 @@ a{color:var(--teal);text-underline-offset:.2em}.mast a{text-decoration:none}.mas
 .byline .authors{font-size:1.125rem}.authors li{white-space:nowrap}
 .byline .affiliations{margin-top:.25rem;font-size:1rem;color:#405454}
 .project-links{grid-column:1/-1;display:flex;gap:.5rem;flex-wrap:wrap}
-.project-links button:disabled{appearance:none;border:1px solid var(--rule);border-radius:2rem;background:transparent;color:#405454;opacity:1;font:600 .9375rem/1.3 var(--sans);padding:.32rem .9rem}
+.project-links a,.project-links button:disabled{appearance:none;border:1px solid var(--rule);border-radius:2rem;background:transparent;color:#405454;opacity:1;font:600 .9375rem/1.3 var(--sans);padding:.32rem .9rem}
+.project-links a{background:var(--teal);border-color:var(--teal);color:white;text-decoration:none}.project-links a:hover,.project-links a:focus-visible{text-decoration:underline}
 .credit-sources{display:block;overflow-wrap:anywhere;color:#405454}
 .showcase>section{border-top:1px solid var(--rule);margin:2.1rem 0;padding-top:1.4rem}.showcase>.tour{position:relative;margin-top:0}
 .showcase h2{font:normal clamp(1.65rem,3vw,2.4rem)/1.16 var(--serif);letter-spacing:-.035em}
